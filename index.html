@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi Ki Doğdun Sevgilim, İyi Ki Varsın Zeynep'im...</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a0b16;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Arkaplan Kalp Yağmuru efekti için */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 75, 110, 0.2);
+            animation: floatUp 6s linear infinite;
+            font-size: 20px;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        /* Dokunmatik Hediye Kutusu */
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: #ff4b6e;
+            margin: 0 auto 30px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(255, 75, 110, 0.4);
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05);
+        }
+
+        /* Kutunun Şeridi */
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            background: #ffe6eb;
+        }
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            background: #ffe6eb;
+        }
+
+        .gift-text {
+            position: absolute;
+            z-index: 5;
+            color: #ff4b6e;
+            font-weight: bold;
+            font-size: 14px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+
+        /* Başlık stili */
+        h1 {
+            font-size: 2.5rem;
+            color: #ff4b6e;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 75, 110, 0.6);
+            display: none;
+        }
+
+        /* Mektup Alanı */
+        .letter-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 75, 110, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: left;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: none;
+            max-height: 60vh;
+            overflow-y: auto;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        /* Uzun yazının dökülme efekti */
+        .paragraph {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dokunulduğunda fırlayan kalpler */
+        .click-heart {
+            position: absolute;
+            color: #ff4b6e;
+            font-size: 24px;
+            pointer-events: none;
+            animation: burst 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* Scrollbar güzelleştirme */
+        .letter-card::-webkit-scrollbar {
+            width: 6px;
+        }
+        .letter-card::-webkit-scrollbar-thumb {
+            background: #ff4b6e;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- İlk başta görünecek hediye kutusu -->
+        <div class="gift-box" id="giftBox" onclick="openGift(event)">
+            <span class="gift-text">Tıkla Sevgilim ❤️</span>
+        </div>
+
+        <h1 id="mainTitle">İyi Ki Doğdun Zeynep'im! 🎂❤️</h1>
+
+        <!-- İçinden çıkacak aşırı uzun aşk mektubu -->
+        <div class="letter-card" id="letterCard">
+            <div class="paragraph" style="animation-delay: 0.5s;">
+                <strong>Benim Canım Sevgilim, Ömrümün En Güzel Rengi Zeynep'im...</strong><br>
+                Bugün sadece senin doğduğun gün değil; benim dünyamın, kalbimin ve kaderimin yeniden yazıldığı gün. İyi ki doğdun, iyi ki hayatıma girdin ve iyi ki benim sevgilim oldun. Seni canımdan çok, her şeyden çok seviyorum.
+            </div>
+            
+            <div class="paragraph" style="animation-delay: 1.5s;">
+                Sen benim hayatımda başıma gelen en güzel, en kusursuz şeysin. Gözlerine her baktığımda, seninle geçirdiğim her saniyede dünyaya ait tüm dertleri unuttuğumu hissediyorum. Kalbin o kadar saf, o kadar güzel ki, bazen seni hak edecek ne yaptım diye kendime sormadan edemiyorum. Sen benim sığınağım, en huzurlu köşemsin.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 2.5s;">
+                Hayat bazen yorucu, bazen karmaşık olabiliyor ama senin varlığın, attığın tek bir mesaj ya da yüzündeki ufacık bir tebessüm bana dünyaları fethedecek gücü veriyor. Biz seninle sadece sevgiliden öte olduk; her şeyi paylaştık, beraber güldük, beraber hayaller kurduk. Geleceğe dair kurduğum her cümlenin başrolünde, her hayalimin tam merkezinde sen varsın.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 3.5s;">
+                Zeynep'im, bu sitenin her satırı, sana olan sevgimin dijital dünyaya dökülmüş ufacık bir kanıtı. Kalbimin büyüklüğünü buraya sığdırmam imkansız ama bil ki, aldığım her nefeste seni daha çok büyütüyorum içimde. Senden uzaktayken bile aklımın her köşesinde, kalbimin her atışında sadece sen varsın. Sen benim bu hayattaki en büyük şansımsın.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 4.5s;">
+                Yeni yaşında, önümüzdeki tüm yıllarda ellerimiz hiç ayrılmasın. Beraber yaşlanalım, beraber ağlayıp beraber kahkahalar atalım. Hayat sana her zaman senin kalbin gibi temiz, güzel ve neşeli günler getirsin. Ben her zaman, ne olursa olsun, bir adım arkanda ya da tam yanında senin en büyük destekçin, seni canından çok seven erkeğin olarak kalacağım.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 5.5s;">
+                Gözlerinin içi hep gülsün sevgilim, çünkü sen güldüğünde benim dünyam aydınlanıyor. Doğum günün kutlu olsun, yeni yaşın bize uğur getirsin, mutluluk getirsin ve en çok da bizi birbirimize daha sıkı bağlasın. İyi ki varsın, iyi ki doğdun kalbimin sahibi Zeynep'im... Seni sonsuza kadar çok seveceğim! ❤️✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arkaplanda sürekli uçuşan kalpler oluşturma
+        function createBgHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createBgHeart, 300);
+
+        // Ekrana her dokunulduğunda/tıklandığında kalpler fırlatma efekti
+        document.body.addEventListener('click', (e) => {
+            // Eğer tıklanan yer mektubun scrollbarı falan değilse kalp fırlat
+            for(let i=0; i<8; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('click-heart');
+                heart.innerHTML = ['❤️','💖','💝','💕'][Math.floor(Math.random()*4)];
+                heart.style.left = e.clientX + 'px';
+                heart.style.top = e.clientY + 'px';
+                
+                // Rastgele yönlere fırlama açıları
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200;
+                heart.style.setProperty('--tx', `${tx}px`);
+                heart.style.setProperty('--ty', `${ty}px`);
+
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1000);
+            }
+        });
+
+        // Hediye kutusunu açma fonksiyonu
+        function openGift(e) {
+            e.stopPropagation(); // Butona tıklayınca iki kere kalp fırlamasın diye
+            const giftBox = document.getElementById('giftBox');
+            const mainTitle = document.getElementById('mainTitle');
+            const letterCard = document.getElementById('letterCard');
+
+            // Kutuyu kaybet
+            giftBox.style.display = 'none';
+            
+            // Başlığı ve Mektubu getir
+            mainTitle.style.display = 'block';
+            letterCard.style.style.display = 'block'; // Bazı tarayıcılar için garantiye alalım
+            letterCard.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
